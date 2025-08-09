@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSwap - Decentralized Exchange</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">CryptoSwap</div>
+        
+        <div class="network-selector">
+            <div class="network-option active" data-network="mainnet">Mainnet</div>
+            <div class="network-option" data-network="testnet">Testnet</div>
+        </div>
+        
+        <button class="connect-wallet" onclick="connectWallet()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="22" height="18" rx="2" ry="2"></rect>
+                <line x1="1" y1="9" x2="23" y2="9"></line>
+            </svg>
+            Connect Wallet
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="swap-card">
+            <div class="swap-header">
+                <h2 class="swap-title">Swap Tokens</h2>
+                <button class="settings-btn" onclick="openSettings()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="m12 1 0 6m0 6 0 6"></path>
+                        <path d="m20.2 7-5.2 3m-6 0L3.8 7"></path>
+                        <path d="m20.2 17-5.2-3m-6 0L3.8 17"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- You Pay Section -->
+            <div class="swap-section">
+                <div class="section-label">You Pay</div>
+                <div class="input-row">
+                    <input type="number" class="amount-input" id="payAmount" placeholder="0" oninput="calculateSwap()">
+                    <div class="token-selector" onclick="toggleDropdown('payToken')" style="position: relative;">
+                        <div class="token-icon" id="payTokenIcon">E</div>
+                        <div class="token-info">
+                            <div class="token-symbol" id="payTokenSymbol">ETH</div>
+                            <div class="token-name" id="payTokenName">Ethereum</div>
+                        </div>
+                        <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                        
+                        <div class="token-dropdown" id="payTokenDropdown">
+                            <div class="token-option" onclick="selectToken('pay', 'ETH', 'Ethereum', 'E')">
+                                <div class="token-icon">E</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">ETH</div>
+                                    <div class="token-name">Ethereum</div>
+                                </div>
+                            </div>
+                            <div class="token-option" onclick="selectToken('pay', 'USDC', 'USD Coin', 'U')">
+                                <div class="token-icon" style="background: linear-gradient(135deg, #2775ca 0%, #6cb2eb 100%);">U</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">USDC</div>
+                                    <div class="token-name">USD Coin</div>
+                                </div>
+                            </div>
+                            <div class="token-option" onclick="selectToken('pay', 'USDT', 'Tether', 'T')">
+                                <div class="token-icon" style="background: linear-gradient(135deg, #26a17b 0%, #2dd4bf 100%);">T</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">USDT</div>
+                                    <div class="token-name">Tether</div>
+                                </div>
+                            </div>
+                            <div class="token-option" onclick="selectToken('pay', 'BTC', 'Bitcoin', 'B')">
+                                <div class="token-icon" style="background: linear-gradient(135deg, #f7931a 0%, #ffb84d 100%);">B</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">BTC</div>
+                                    <div class="token-name">Bitcoin</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Swap Arrow -->
+            <div class="swap-arrow">
+                <button class="swap-arrow-btn" onclick="swapTokens()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <polyline points="19,12 12,19 5,12"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- You Receive Section -->
+            <div class="swap-section">
+                <div class="section-label">You Receive</div>
+                <div class="input-row">
+                    <input type="number" class="amount-input" id="receiveAmount" placeholder="0" readonly>
+                    <div class="token-selector" onclick="toggleDropdown('receiveToken')" style="position: relative;">
+                        <div class="token-icon" id="receiveTokenIcon" style="background: linear-gradient(135deg, #2775ca 0%, #6cb2eb 100%);">U</div>
+                        <div class="token-info">
+                            <div class="token-symbol" id="receiveTokenSymbol">USDC</div>
+                            <div class="token-name" id="receiveTokenName">USD Coin</div>
+                        </div>
+                        <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                        
+                        <div class="token-dropdown" id="receiveTokenDropdown">
+                            <div class="token-option" onclick="selectToken('receive', 'ETH', 'Ethereum', 'E')">
+                                <div class="token-icon">E</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">ETH</div>
+                                    <div class="token-name">Ethereum</div>
+                                </div>
+                            </div>
+                            <div class="token-option" onclick="selectToken('receive', 'USDC', 'USD Coin', 'U')">
+                                <div class="token-icon" style="background: linear-gradient(135deg, #2775ca 0%, #6cb2eb 100%);">U</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">USDC</div>
+                                    <div class="token-name">USD Coin</div>
+                                </div>
+                            </div>
+                            <div class="token-option" onclick="selectToken('receive', 'USDT', 'Tether', 'T')">
+                                <div class="token-icon" style="background: linear-gradient(135deg, #26a17b 0%, #2dd4bf 100%);">T</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">USDT</div>
+                                    <div class="token-name">Tether</div>
+                                </div>
+                            </div>
+                            <div class="token-option" onclick="selectToken('receive', 'BTC', 'Bitcoin', 'B')">
+                                <div class="token-icon" style="background: linear-gradient(135deg, #f7931a 0%, #ffb84d 100%);">B</div>
+                                <div class="token-info">
+                                    <div class="token-symbol">BTC</div>
+                                    <div class="token-name">Bitcoin</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Impact Warning -->
+            <div class="price-impact" id="priceImpactWarning">
+                <div class="price-impact-text">
+                    ⚠️ High price impact: <span id="priceImpactValue">5.2%</span>
+                </div>
+            </div>
+
+            <!-- Swap Button -->
+            <button class="swap-button" id="swapButton" onclick="executeSwap()">
+                Swap
+            </button>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="transaction-history">
+            <div class="history-header">Recent Transactions</div>
+            <div class="history-item">
+                <div class="history-details">
+                    <div class="history-amount">2.5 ETH → 5,247.32 USDC</div>
+                    <div class="history-time">2 minutes ago</div>
+                </div>
+                <div class="history-status success">Success</div>
+            </div>
+            <div class="history-item">
+                <div class="history-details">
+                    <div class="history-amount">1,000 USDT → 0.47 ETH</div>
+                    <div class="history-time">1 hour ago</div>
+                </div>
+                <div class="history-status pending">Pending</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="settings-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Transaction Settings</h3>
+                <button class="close-btn" onclick="closeSettings()">×</button>
+            </div>
+            
+            <div class="setting-item">
+                <label class="setting-label">Slippage Tolerance</label>
+                <input type="number" class="setting-input" id="slippageTolerance" value="0.5" step="0.1" min="0.1" max="50">
+                <small style="color: #666; font-size: 0.8rem;">Your transaction will revert if the price changes unfavorably by more than this percentage.</small>
+            </div>
+            
+            <div class="setting-item">
+                <label class="setting-label">Transaction Deadline</label>
+                <input type="number" class="setting-input" id="transactionDeadline" value="20" min="1" max="4320">
+                <small style="color: #666; font-size: 0.8rem;">Your transaction will revert if it is pending for more than this long.</small>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
