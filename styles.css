@@ -1,0 +1,576 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4A90E2;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: #357ABD;
+}
+
+.network-selector {
+    display: flex;
+    background: #f0f4f8;
+    border-radius: 25px;
+    padding: 4px;
+    position: relative;
+}
+
+.network-option {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+.network-option.active {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: #4A90E2;
+}
+
+.connect-wallet {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.connect-wallet:hover {
+    background: #357ABD;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+}
+
+/* Main Container */
+.container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.swap-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.swap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.swap-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.settings-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #f8f9fa;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.settings-btn:hover {
+    background: #e9ecef;
+    transform: rotate(90deg);
+}
+
+/* Swap Sections */
+.swap-section {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.swap-section:focus-within {
+    border-color: #4A90E2;
+}
+
+.section-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.amount-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    outline: none;
+    width: 100%;
+}
+
+.amount-input::placeholder {
+    color: #ccc;
+}
+
+.token-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.token-selector:hover {
+    border-color: #4A90E2;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+}
+
+.token-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.token-info {
+    flex: 1;
+}
+
+.token-symbol {
+    font-weight: 600;
+    color: #333;
+}
+
+.token-name {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.dropdown-arrow {
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.token-selector.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Swap Arrow */
+.swap-arrow {
+    display: flex;
+    justify-content: center;
+    margin: -0.5rem 0;
+    position: relative;
+    z-index: 10;
+}
+
+.swap-arrow-btn {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.swap-arrow-btn:hover {
+    border-color: #4A90E2;
+    color: #4A90E2;
+    transform: rotate(180deg);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+/* Swap Button */
+.swap-button {
+    width: 100%;
+    padding: 1rem;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.swap-button:hover:not(:disabled) {
+    background: #357ABD;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+}
+
+.swap-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.swap-button.loading {
+    background: #ccc;
+    cursor: wait;
+}
+
+/* Dropdown */
+.token-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+}
+
+.token-dropdown.show {
+    display: block;
+}
+
+.token-option {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.token-option:last-child {
+    border-bottom: none;
+}
+
+.token-option:hover {
+    background: #f8f9fa;
+}
+
+/* Settings Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.settings-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #f0f0f0;
+}
+
+.setting-item {
+    margin-bottom: 1.5rem;
+}
+
+.setting-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.setting-input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.setting-input:focus {
+    outline: none;
+    border-color: #4A90E2;
+}
+
+/* Price Impact Warning */
+.price-impact {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    display: none;
+}
+
+.price-impact.show {
+    display: block;
+}
+
+.price-impact.high {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.price-impact-text {
+    font-size: 0.9rem;
+    color: #856404;
+}
+
+.price-impact.high .price-impact-text {
+    color: #721c24;
+}
+
+/* Transaction History */
+.transaction-history {
+    margin-top: 2rem;
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.history-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.history-details {
+    flex: 1;
+}
+
+.history-amount {
+    font-weight: 600;
+    color: #333;
+}
+
+.history-time {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.history-status {
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.history-status.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.history-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    border: 2px solid transparent;
+    border-top: 2px solid #4A90E2;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .swap-card {
+        padding: 1.5rem;
+    }
+
+    .amount-input {
+        font-size: 1.5rem;
+    }
+
+    .network-selector {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .logo {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .network-selector {
+        order: 2;
+        margin-bottom: 0.5rem;
+    }
+    
+    .connect-wallet {
+        order: 3;
+        justify-content: center;
+    }
+    
+    .swap-card {
+        padding: 1rem;
+    }
+    
+    .token-selector {
+        min-width: 120px;
+    }
+    
+    .amount-input {
+        font-size: 1.3rem;
+    }
+}
