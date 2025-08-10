@@ -44,7 +44,7 @@ A modern, responsive cryptocurrency swap. This project provides a complete DEX (
 
 ### Manual Testing Checklist:
 - [ ] All token selections work correctly
-- [ ] Swap calculations are accurate
+- [✅] Swap calculations are accurate
 - [ ] Responsive design on all screen sizes
 - [ ] Keyboard navigation functions
 - [ ] Error states display properly
